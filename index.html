@@ -338,7 +338,7 @@
 
       <article class="project project-purgo">
         <header class="project-header"><div class="project-title"><span class="project-number" aria-hidden="true">02</span><h3>Purgo</h3></div><span class="date">2025.03 — 2025.06</span></header>
-        <p class="project-description">게시글·댓글 작성 후 비속어를 감지해 순화하고, 비속어 사용 횟수에 따라 작성 권한을 제한하는 커뮤니티</p>
+        <p class="project-description"><strong>사용자가 작성한 비속어를 감지하고 순화하는 AI API 제공 서비스</strong><br><br>게시글·댓글 작성 후 API를 호출해 비속어를 감지·순화하고, 누적 횟수 위반에 따라 작성 권한을 제한하는 Purgo API 활용 예시 커뮤니티</p>
         <div class="project-meta"><span class="team">12인 팀</span><span class="responsibility"><strong>담당 역할</strong> · 백엔드 개발 · 인증·사용자 관리 · AI 필터 연동</span></div>
         <p class="tech"><strong>TECH</strong>Java · Spring Boot · Spring Security · JWT · MySQL · Redis · Docker</p>
         <div class="project-gallery" role="group" aria-label="Purgo 서비스 화면">
@@ -366,7 +366,7 @@
           <li><strong>서버 오류가 403으로 반환되는 문제 해결</strong><p>응답 데이터에 null이 포함될 때 <code>Map.of()</code>에서 NPE가 발생하고, Spring Security가 내부 <code>/error</code> 요청을 차단해 원래 오류가 403으로 보이는 문제를 추적했음. 응답 객체를 null 값을 허용하는 <code>HashMap&lt;String, Object&gt;</code>으로 변경해 NPE를 방지했음. <code>/error</code> 접근 규칙과 전역 예외 처리기를 보강했음. 그 결과 서버 내부 오류와 인증·인가 오류가 구분되어 HTTP 상태 코드와 오류 응답이 전달되도록 개선했음.</p></li>
           <li><strong>JWT 인증·토큰 관리</strong><p>회원가입·로그인·토큰 재발급 구현. Redis에 리프레시 토큰을 저장·검증하고, 로그아웃한 액세스 토큰을 블랙리스트로 관리.</p></li>
           <li><strong>AI 필터·작성 제한 연동</strong><p>게시글·댓글 작성 요청을 <code>RestTemplate</code>으로 AI 필터 서버에 전달했음. API Key와 서버 JWT를 함께 검증하도록 연동했음. 필터가 반환한 순화 문구를 저장하고 위반 횟수를 갱신했으며, 누적 5회 위반 시 제재 기간 동안 작성 요청을 차단하도록 서비스 흐름에 연결했음.</p></li>
-          <li><strong>서비스 책임 분리 및 리팩토링</strong><p>게시글·댓글 서비스에 집중됐던 필터 통신과 결과 반영, 제재 판단 흐름을 점검했음. 비속어 검사와 필터 서버 연동을 <code>CheckBadwordService</code>로 분리하고, 누적 위반 횟수와 제재 기간은 <code>UserLimitsEntity</code>를 중심으로 관리하도록 정리했음. 사용자 초기화는 <code>UserFactory</code>로, DTO 변환은 정적 팩토리 메서드로 옮겨 객체 생성 규칙을 한곳에서 관리했음.</p></li>
+          <li><strong>서비스 책임 분리 및 리팩토링</strong><p>게시글·댓글 서비스에 집중됐던 필터 통신과 결과 반영, 제재 판단 흐름을 점검했음. 비속어 검사와 필터 서버 연동을 <code>CheckBadwordService</code>로 분리하고, 누적 횟수 위반과 제재 기간은 <code>UserLimitsEntity</code>를 중심으로 관리하도록 정리했음. 사용자 초기화는 <code>UserFactory</code>로, DTO 변환은 정적 팩토리 메서드로 옮겨 객체 생성 규칙을 한곳에서 관리했음.</p></li>
         </ul>
         <div class="project-links"><a href="https://github.com/sk2-purgo/Back_Community.git" target="_blank" rel="noopener noreferrer">GitHub <span class="arrow" aria-hidden="true">↗</span></a><a href="https://youtu.be/63M3BWHPxzc" target="_blank" rel="noopener noreferrer">서비스 시연 <span class="arrow" aria-hidden="true">↗</span></a></div>
         <details open><summary>추가 구현 및 협업 내용</summary><ul>
